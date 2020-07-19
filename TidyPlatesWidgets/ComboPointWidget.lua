@@ -35,14 +35,27 @@ local function GetChiTarget()
 
 		if SPEC_MONK_BREWMASTER == GetSpecialization() then return end
 
-		local points = UnitPower("player", SPELL_POWER_CHI)
-		local maxPoints = UnitPowerMax("player", SPELL_POWER_CHI)
+		local points = UnitPower("player", 12)
+		local maxPoints = UnitPowerMax("player", 12)
 
 		return points, maxPoints
 
 	end
 end
 
+local function GetHolyPower()
+	if UnitCanAttack("player", "target") then
+
+ 
+
+		local points = UnitPower("player", 9 )
+		local maxPoints = UnitPowerMax("player", 9 )
+
+
+		return points, maxPoints
+
+	end
+end
 
 
 local function ConfigDruid()
@@ -61,6 +74,8 @@ local LocalName, PlayerClass = UnitClass("player")
 
 if PlayerClass == "MONK" then
 	GetResourceOnTarget = GetChiTarget
+elseif PlayerClass == "PALADIN" then
+	GetResourceOnTarget = GetHolyPower
 elseif PlayerClass == "ROGUE" then
 	GetResourceOnTarget = GetComboPointTarget
 elseif PlayerClass == "DRUID" then
